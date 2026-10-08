@@ -1,0 +1,64 @@
+{
+  "synthetic_data_notice": "All conditional probability values in this file describe a fictional, synthetic educational simulation. This is not a real student-evaluation system.",
+  "format_notes": "Each node has 'parents' (in fixed order), 'states' (in fixed order), and 'table', a dict keyed by the parent state values joined with '|' in the same order as 'parents'. Root nodes (no parents) use the single key ''. Every row in every table sums to 1.0.",
+  "PriorPreparation": {
+    "parents": [],
+    "states": ["Low", "Medium", "High"],
+    "table": {
+      "": [0.3, 0.4, 0.3]
+    }
+  },
+  "Attendance": {
+    "parents": [],
+    "states": ["Low", "Medium", "High"],
+    "table": {
+      "": [0.25, 0.45, 0.3]
+    }
+  },
+  "ExamDifficulty": {
+    "parents": [],
+    "states": ["Easy", "Medium", "Hard"],
+    "table": {
+      "": [0.3, 0.4, 0.3]
+    }
+  },
+  "StudyConsistency": {
+    "parents": ["PriorPreparation", "Attendance"],
+    "states": ["Low", "Medium", "High"],
+    "table": {
+      "Low|Low": [0.7, 0.25, 0.05],
+      "Low|Medium": [0.5, 0.35, 0.15],
+      "Low|High": [0.3, 0.4, 0.3],
+      "Medium|Low": [0.5, 0.35, 0.15],
+      "Medium|Medium": [0.3, 0.45, 0.25],
+      "Medium|High": [0.15, 0.4, 0.45],
+      "High|Low": [0.3, 0.4, 0.3],
+      "High|Medium": [0.15, 0.35, 0.5],
+      "High|High": [0.05, 0.25, 0.7]
+    }
+  },
+  "AssignmentCompletion": {
+    "parents": ["StudyConsistency"],
+    "states": ["Low", "Medium", "High"],
+    "table": {
+      "Low": [0.6, 0.3, 0.1],
+      "Medium": [0.25, 0.5, 0.25],
+      "High": [0.1, 0.3, 0.6]
+    }
+  },
+  "Performance": {
+    "parents": ["AssignmentCompletion", "ExamDifficulty"],
+    "states": ["Fail", "Pass", "Distinction"],
+    "table": {
+      "Low|Easy": [0.35, 0.55, 0.10],
+      "Low|Medium": [0.50, 0.45, 0.05],
+      "Low|Hard": [0.65, 0.33, 0.02],
+      "Medium|Easy": [0.15, 0.60, 0.25],
+      "Medium|Medium": [0.25, 0.55, 0.20],
+      "Medium|Hard": [0.40, 0.50, 0.10],
+      "High|Easy": [0.05, 0.45, 0.50],
+      "High|Medium": [0.10, 0.50, 0.40],
+      "High|Hard": [0.20, 0.55, 0.25]
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "synthetic_data_notice": "All evidence values, scenarios, and outcomes in this file describe a fictional, synthetic educational simulation modelled on FIT HANU (Khoa Công nghệ Thông tin, Trường Đại học Hà Nội). This is NOT a real student-evaluation system and must never be used to assess any actual student.",
+  "scenarios": [
+    {
+      "id": "P05-LITTLE-EVIDENCE",
+      "class": "little_evidence",
+      "description": "A FIT HANU AIN301 student is observed to have Medium attendance this semester, but no other information is available yet. Query their likely Performance.",
+      "evidence": { "Attendance": "Medium" },
+      "query": "Performance",
+      "expected_direction": "Posterior over Performance should stay close to the marginal (prior) distribution; do not expect a strong shift from a single, moderate observation."
+    },
+    {
+      "id": "P05-STRONG-POSITIVE",
+      "class": "strong_positive",
+      "description": "An exemplary FIT HANU K22 student: well-prepared from high school, near-perfect attendance in Nhà C lab sessions, high assignment completion rate, and the AIN301 final turns out to be Easy this semester.",
+      "evidence": {
+        "PriorPreparation": "High",
+        "Attendance": "High",
+        "AssignmentCompletion": "High",
+        "ExamDifficulty": "Easy"
+      },
+      "query": "Performance",
+      "expected_direction": "Posterior mass should shift clearly toward Pass/Distinction relative to the prior — strong preparation and easy exam combine favorably."
+    },
+    {
+      "id": "P05-CONFLICTING",
+      "class": "conflicting",
+      "description": "A FIT HANU K23 student has strong prior preparation and attends every AIN301 lecture, but submitted very few assignments and the midterm paper was Hard this semester. The model sees conflicting signals.",
+      "evidence": {
+        "PriorPreparation": "High",
+        "Attendance": "High",
+        "AssignmentCompletion": "Low",
+        "ExamDifficulty": "Hard"
+      },
+      "query": "Performance",
+      "expected_direction": "Posterior should land between the strong-positive and a strong-negative extreme; no single outcome should dominate as it does in the strong-positive scenario."
+    },
+    {
+      "id": "P05-CPT-SENSITIVITY",
+      "class": "cpt_sensitivity",
+      "description": "Baseline evidence for the required CPT sensitivity experiment: a FIT HANU student completes a Medium fraction of AIN301 assignments and faces a Medium-difficulty exam. This is the starting point.",
+      "evidence": { "AssignmentCompletion": "Medium", "ExamDifficulty": "Medium" },
+      "query": "Performance",
+      "required_experiment": "Change one CPT row (for example, the row for Performance | AssignmentCompletion=Medium, ExamDifficulty=Medium) or change one evidence value from this scenario, recompute the posterior, and report how far and in which direction the posterior over Performance moves compared to this baseline. Repeat for at least one more change to show how sensitive the model is to that parameter.",
+      "expected_direction": "There is no single fixed answer; report your own measured shift and interpret it in the context of what it means for a FIT HANU AIN301 student's performance."
+    }
+  ]
+}

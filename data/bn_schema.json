@@ -1,0 +1,56 @@
+{
+  "synthetic_data_notice": "All variables, states, and CPT values in this file describe a fictional, synthetic educational simulation modelled on the context of FIT HANU (Khoa Công nghệ Thông tin, Trường Đại học Hà Nội). This is NOT a real student-evaluation system and must never be used to assess any actual student.",
+  "network_name": "hanu_fit_student_scenario_simulator",
+  "context": "Simulates a synthetic FIT HANU IT student's academic trajectory in a semester. All variable names, states, and CPT values are chosen for pedagogical clarity in a CS50 AI course on Bayesian Networks — not as a real performance prediction model.",
+  "nodes": [
+    {
+      "name": "PriorPreparation",
+      "states": ["Low", "Medium", "High"],
+      "parents": [],
+      "description": "Synthetic measure of how prepared the FIT HANU student was before the semester started (e.g. foundation course grades, self-study during summer)."
+    },
+    {
+      "name": "Attendance",
+      "states": ["Low", "Medium", "High"],
+      "parents": [],
+      "description": "Synthetic class-attendance level at FIT HANU lecture and lab sessions during the semester. A student with High attendance rarely misses AIN301 or lab sessions in Nhà C."
+    },
+    {
+      "name": "ExamDifficulty",
+      "states": ["Easy", "Medium", "Hard"],
+      "parents": [],
+      "description": "Synthetic exam difficulty, an external factor independent of the student. Represents how challenging the AIN301 midterm or final paper happens to be that semester."
+    },
+    {
+      "name": "StudyConsistency",
+      "states": ["Low", "Medium", "High"],
+      "parents": ["PriorPreparation", "Attendance"],
+      "description": "How consistently the synthetic FIT HANU student studied throughout the semester, driven by prior preparation and attendance habits."
+    },
+    {
+      "name": "AssignmentCompletion",
+      "states": ["Low", "Medium", "High"],
+      "parents": ["StudyConsistency"],
+      "description": "Fraction of assignments and project milestones completed on time, driven by study consistency. In AIN301 this includes the Midterm AI Core submission and Final AI Product."
+    },
+    {
+      "name": "Performance",
+      "states": ["Fail", "Pass", "Distinction"],
+      "parents": ["AssignmentCompletion", "ExamDifficulty"],
+      "description": "Synthetic final academic outcome for the semester, driven by assignment completion and exam difficulty. Modelled on a 3-tier grading band used for illustration."
+    }
+  ],
+  "edges": [
+    ["PriorPreparation", "StudyConsistency"],
+    ["Attendance", "StudyConsistency"],
+    ["StudyConsistency", "AssignmentCompletion"],
+    ["AssignmentCompletion", "Performance"],
+    ["ExamDifficulty", "Performance"]
+  ],
+  "independence_notes": [
+    "PriorPreparation and Attendance have no parents and are modeled as marginally independent root causes.",
+    "ExamDifficulty has no parents and is independent of every student-side variable; it is an external root cause set by the instructor.",
+    "AssignmentCompletion is conditionally independent of PriorPreparation and Attendance given StudyConsistency.",
+    "Performance is conditionally independent of PriorPreparation, Attendance, and StudyConsistency given AssignmentCompletion and ExamDifficulty."
+  ]
+}
